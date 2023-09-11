@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace 반드시 작성!
+    member memeber mamber
+ -->
+<mapper namespace="Board">
+    <insert id="insert" parameterType="board">
+        insert into board_table(boardWriter,boardPass,boardTitle,boardContents) values (#{boardWriter},#{boardPass},#{boardTitle},#{boardContents})
+    </insert>
+    <select id="selectList" parameterType="board" resultType="board">
+        select * from board_table
+    </select>
+    <select id="selectOne" parameterType="Long" resultType="board">
+        select * from board_table where id=#{id}
+    </select>
+    <select id="deleteCheck" parameterType="Long" resultType="board">
+        select * from board_table where id=#{id}
+    </select>
+    <delete id="delete" parameterType="Long">
+        delete from board_table where id=#{id}
+    </delete>
+    <update id="update" parameterType="board">
+        update board_table set boardTitle=#{boardTitle}, boardContents=#{boardContents} where id=#{id}
+    </update>
+    <select id="searchName" parameterType="String" resultType="board">
+        select * from board_table where boardName like '%' || #{query} || '%'
+    </select>
+    <select id="searchTitle" parameterType="String" resultType="board">
+        select * from board_table where boardTitle like '%' || #{query} || '%'
+    </select>
+</mapper>
